@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Xclusive Recipes</h1>
+
+    <ul>
+        {% for post in recipes %}
+        <li>
+            <a href="/post/{{ post.id }}/">{{ post.title }}</a> - by <a href="/auth/{{ post.author.id }}"">{{ post.author.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

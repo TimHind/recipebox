@@ -1,0 +1,8 @@
+<div class="container">
+    {% if not auth %}
+        <h1>the author you're looking for isn't here at the moment</h1>
+    {% else %}
+        <h2>{{ auth.name }}</h1>
+        <p></p>
+    {% endif %}
+</div>
