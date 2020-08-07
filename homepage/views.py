@@ -11,4 +11,5 @@ def post_detail(request, post_id):
 
 def author_detail(request, auth_id):
     current_auth = Author.objects.filter(id=auth_id).first()
-    return render(request, "author_detail.html", {"auth": current_auth})
+    my_recipes = Recipe.objects.all()
+    return render(request, "author_detail.html", {"auth": current_auth, "recipes": my_recipes})
