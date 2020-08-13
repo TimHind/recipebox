@@ -1,8 +1,11 @@
-<a href="/">Home</a>/<a href="/newauthor/">Create New Author!</a>/<a href="/newrecipe/">Create New Recipe!</a>
+<a href="/">Home</a>/<a href="/newauthor/">Create New Author!</a>/<a href="/newrecipe/">Create New Recipe!</a>/<a href="/logout/">Logout</a>
 <div class="container">
     <h1>Xclusive Recipes</h1>
     <p><i>click food to see their tasty recipes</i></p>
-
+    {% if request.user.is_authenticated %}
+        <h3>Welcome, {{ request.user.author.name }}!</h3>
+    {% endif %}
+    <h4>Autheticated: {{ request.user.is_authenticated}}</h4>
     <ul>
         {% for post in recipes %}
         <li>
