@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from homepage.models import Recipe, Author
-from homepage.forms import RecipeForm, AuthorForm, LoginForm, SignupForm
+from homepage.forms import RecipeForm, AuthorForm, LoginForm
 
 
 def index(request):
@@ -40,9 +40,14 @@ def recipe_form_view(request):
 @login_required
 @staff_member_required
 def author_form_view(request):
+    """ Help from Peter """
     if request.method == "POST":
         form = AuthorForm(request.POST)
-        form.save()
+        data = form.data
+        new_user = User.objects.create_user(username=data.get("username"), password=data.get("password"))
+        new_author = form.save(commit=False)
+        new_author.user = new_user
+        new_author.save()
         return HttpResponseRedirect(reverse("homepage"))
     
     form = AuthorForm()
